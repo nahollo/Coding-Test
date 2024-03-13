@@ -1,57 +1,29 @@
+// 타겟 넘버 (dfs 예제 문제)
+
 class Solution {
-	String begin;
-	String target;
-	String[] words;
-	int[] visit;
-	int min;
+	int[] numbers; // 숫자의 값을 저장하는 배열
+	int target; // 타겟
+	int answer; // 리턴 값
 
-	public int solution(String begin, String target, String[] words) {
-		this.begin = begin;
-		this.target = target;
-		this.words = words;
-		visit = new int[words.length];
-		int difcount = 0;
-
-		min = words.length;
-
-		for (int i = 0; i < words.length; i++) {
-			if (target.equals(words[i])) {
-				difcount++;
+	void dfs(int index, int sum) {
+		// 1. dfs 탈출조건
+		if (index == numbers.length) {
+			if (sum == target) {
+				answer++;
 			}
-		}
-		if (difcount == 0) {
-			return 0;
-		}
-		
-		dfs(begin, 0);
-
-		return min;
-	}
-
-	void dfs(String word, int step) {
-		if (word.equals(target)) {
-			min = Math.min(min, step);
 			return;
 		}
-		for (int i = 0; i < words.length; i++) {
-			if (visit[i] == 0 && diffrent_Check(word, words[i])) {
-				visit[i] = 1;
-				dfs(words[i], step + 1);
-				visit[i] = 0;
-			}
-		}
+		// 2. dfs 수행동작
+		dfs(index + 1, sum + numbers[index]);
+		dfs(index + 1, sum - numbers[index]);
 	}
 
-	boolean diffrent_Check(String word1, String word2) { // 한개만 다른지 체크하는 메소드
-		int diffrent_Count = 0; // 두 String의 다른만큼 카운트 해주는 변수
-		for (int i = 0; i < word1.length(); i++) {
-			if (word1.charAt(i) != word2.charAt(i)) {
-				diffrent_Count++;
-				if (diffrent_Count > 1) { // 한개 이상으로 다를 때
-					return false; // 할 수 없다
-				}
-			}
-		}
-		return diffrent_Count == 1;
+	public int solution(int[] numbers, int target) {
+		this.numbers = numbers;
+		this.target = target;
+
+		dfs(0, 0);
+
+		return this.answer;
 	}
 }
