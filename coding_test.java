@@ -1,34 +1,41 @@
-import java.util.Stack;
+class Solution {
+    public int solution(String s) {
+        int answer = 0;
+        char[] num = new char[s.length()]; // s를 char 배열로 받기
 
-class Solution { // 택배 상자
-	public int solution(int[] order) {
-		int answer = 0; // 트럭에 실리는 상자
-		int box = 1; // 컨베이어 벨트
-		Stack<Integer> temp = new Stack<>(); // 예비 컨베이어 벨트
+        for (int i = 0; i < s.length(); i++) {
+            num[i] = s.charAt(i);
+        }
+        if (num[0] == '-') { // s의 맨 앞이 -일 때
+            for (int i = 1; i < s.length(); i++) {
+                answer = answer + (num[s.length() - i] - '0') * j(i - 1);
+            }
+            answer = answer * (-1);
+            System.out.println(answer);
+        } else if (num[0] == '+') { // s의 맨 앞이 +일 때
+            for (int i = 1; i < s.length(); i++) {
+                answer = answer + (num[s.length() - i] - '0') * j(i - 1);
+            }
+            System.out.println(answer);
+        } else {
+            for (int i = 0; i < s.length(); i++) { // s의 맨 앞에 아무것도 없을 때
+                answer = answer + (num[s.length() - i - 1] - '0') * j(i);
+            }
+        }
 
-		while (answer < order.length) {
-			if (!temp.empty()) {
-				if (order[answer] < box && order[answer] < temp.peek()) { // 오더 값이 컨베이어보다 작고 예비 컨베이어랑 다를 때
-					return answer;
-				}
-			}
-			if (order[answer] == box) {
-				box++;
-				answer++;
-				continue;
-			}
-			if (!temp.empty()) {
-				if (order[answer] == temp.peek()) { // 예비 컨베이어 제일 뒷쪽 박스가 오더랑 같을 때
-					temp.pop();
-					answer++;
-					continue;
-				}
-			}
-			// 컨베이어에 있는 박스가 예비 컨베이어에 올라갈 때
-			temp.push(box);
-			box++;
-		}
+        return answer;
+    }
 
-		return answer;
-	}
+    public int j(int x) { // 10의 제곱을 만드는 메서드
+        int temp = 1;
+        if (x == 0) {
+            return 1;
+        } else {
+            for (int i = 0; i < x; i++) {
+                temp = temp * 10;
+            }
+            return temp;
+        }
+
+    }
 }
