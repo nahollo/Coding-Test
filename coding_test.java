@@ -1,29 +1,34 @@
-// 타겟 넘버 (dfs 예제 문제)
+import java.util.Stack;
 
-class Solution {
-	int[] numbers; // 숫자의 값을 저장하는 배열
-	int target; // 타겟
-	int answer; // 리턴 값
+class Solution { // 택배 상자
+	public int solution(int[] order) {
+		int answer = 0; // 트럭에 실리는 상자
+		int box = 1; // 컨베이어 벨트
+		Stack<Integer> temp = new Stack<>(); // 예비 컨베이어 벨트
 
-	void dfs(int index, int sum) {
-		// 1. dfs 탈출조건
-		if (index == numbers.length) {
-			if (sum == target) {
-				answer++;
+		while (answer < order.length) {
+			if (!temp.empty()) {
+				if (order[answer] < box && order[answer] < temp.peek()) { // 오더 값이 컨베이어보다 작고 예비 컨베이어랑 다를 때
+					return answer;
+				}
 			}
-			return;
+			if (order[answer] == box) {
+				box++;
+				answer++;
+				continue;
+			}
+			if (!temp.empty()) {
+				if (order[answer] == temp.peek()) { // 예비 컨베이어 제일 뒷쪽 박스가 오더랑 같을 때
+					temp.pop();
+					answer++;
+					continue;
+				}
+			}
+			// 컨베이어에 있는 박스가 예비 컨베이어에 올라갈 때
+			temp.push(box);
+			box++;
 		}
-		// 2. dfs 수행동작
-		dfs(index + 1, sum + numbers[index]);
-		dfs(index + 1, sum - numbers[index]);
-	}
 
-	public int solution(int[] numbers, int target) {
-		this.numbers = numbers;
-		this.target = target;
-
-		dfs(0, 0);
-
-		return this.answer;
+		return answer;
 	}
 }
