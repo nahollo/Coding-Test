@@ -1,13 +1,14 @@
 class Solution {
-    public int[] solution(int[] prices) {
-        int[] answer = new int[prices.length]; // 리턴값
-        for (int i = 0; i < prices.length; i++) {
-            for (int j = i + 1; j < prices.length; j++) {
-                if (prices[i] > prices[j]) { // 앞에 가격이 더 클 때
-                    answer[i]++; // 앞에 값이 더 클 때 == 가격이 떨어졌을 때
-                    break; // 가격이 떨어지면 값 비교하는 부분 break
-                } else {
-                    answer[i]++; // 가격이 안떨어졌을 때는 answer값 1씩 증가
+    public int[] solution(int brown, int yellow) {
+        int[] answer = new int[2];
+        int yellow_Width;
+        for (int yellow_Length = 1; yellow_Length <= yellow / 2 + 1; yellow_Length++) {
+            if (yellow % yellow_Length == 0) {
+                yellow_Width = yellow / yellow_Length;
+                if ((2 * yellow_Length + 2 * yellow_Width + 4 == brown) && (yellow_Length >= yellow_Width)) {
+                    answer[0] = yellow_Length + 2;
+                    answer[1] = yellow_Width + 2;
+                    return answer;
                 }
             }
         }
