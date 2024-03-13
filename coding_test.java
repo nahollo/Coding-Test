@@ -1,14 +1,23 @@
 class Solution {
-
-	public int solution(int n) {
-		Solution s = new Solution();
-		int[] dp = new int[n + 1];
-		dp[1] = 1;
-		dp[2] = 2;
-
-		for (int i = 3; i <= n; i++) {
-			dp[i] = (dp[i - 2] + dp[i - 1]) % 1000000007;
+	boolean solution(String s) {
+		boolean answer = true;
+		int count = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == '(') {
+				count++;
+			} else {
+				if(count == 0) {
+					return false;
+				}
+				count--;
+			}
 		}
-		return dp[n];
+
+		if (count == 0 && (s.charAt(0) == '(' && s.charAt(s.length() - 1) == ')')){
+			
+		} else {
+			answer = false;
+		}
+		return answer;
 	}
 }
