@@ -1,11 +1,17 @@
+import java.util.Arrays;
+
 class Solution {
-    public long solution(int n) {
-        int[] dp = new int[2001];
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i < 2001; i++) {
-            dp[i] = (dp[i - 2] + dp[i - 1]) % 1234567;
-        }
-        return dp[n];
-    }
+	public int solution(int[] A, int[] B) {
+		int answer = 0;
+		int j = B.length;
+
+		Arrays.sort(A);
+		Arrays.sort(B);
+
+		for (int i = 0; i < A.length; i++) {
+			answer += A[i] * B[j - 1];
+			j--;
+		}
+		return answer;
+	}
 }
