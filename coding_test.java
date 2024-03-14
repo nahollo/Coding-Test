@@ -1,17 +1,17 @@
 class Solution {
-    public String solution(String phone_number) {
-        String answer = "";
-        char[] num = new char[phone_number.length()];
-        for (int i = 0; i < phone_number.length() - 4; i++) {
-            num[i] = '*';
+    public long solution(int a, int b) {
+        long answer = 0;
+        if (a > b) {
+            for (int i = b; i <= a; i++) {
+                answer = answer + i;
+            }
+        } else if (a < b) {
+            for (int i = a; i <= b; i++) {
+                answer = answer + i;
+            }
+        } else {
+            answer = a;
         }
-        for (int i = phone_number.length() - 4; i < phone_number.length(); i++) {
-            num[i] = phone_number.charAt(i);
-        }
-        for (int i = 0; i < phone_number.length(); i++) {
-            answer = answer + num[i];
-        }
-        System.out.println(answer);
 
         return answer;
     }
