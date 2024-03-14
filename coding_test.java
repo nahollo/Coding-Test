@@ -1,16 +1,18 @@
-import java.util.Scanner;
-
 class Solution {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-
-        for (int i = 0; i < b; i++) {
-            for (int j = 0; j < a; j++) {
-                System.out.print("*");
-            }
-            System.out.println();
+    public String solution(String phone_number) {
+        String answer = "";
+        char[] num = new char[phone_number.length()];
+        for (int i = 0; i < phone_number.length() - 4; i++) {
+            num[i] = '*';
         }
+        for (int i = phone_number.length() - 4; i < phone_number.length(); i++) {
+            num[i] = phone_number.charAt(i);
+        }
+        for (int i = 0; i < phone_number.length(); i++) {
+            answer = answer + num[i];
+        }
+        System.out.println(answer);
+
+        return answer;
     }
 }
