@@ -1,18 +1,12 @@
 class Solution {
-    public long solution(int a, int b) {
-        long answer = 0;
-        if (a > b) {
-            for (int i = b; i <= a; i++) {
-                answer = answer + i;
+    public String solution(String[] seoul) {
+        String answer = "";
+        for (int i = 0; i < seoul.length; i++) {
+            if (seoul[i].equals("Kim")) {
+                answer = "김서방은 " + i + "에 있다";
+                break;
             }
-        } else if (a < b) {
-            for (int i = a; i <= b; i++) {
-                answer = answer + i;
-            }
-        } else {
-            answer = a;
         }
-
         return answer;
     }
 }
