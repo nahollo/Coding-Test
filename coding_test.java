@@ -1,10 +1,13 @@
 class Solution {
-    public String solution(String[] seoul) {
+    public String solution(int n) {
         String answer = "";
-        for (int i = 0; i < seoul.length; i++) {
-            if (seoul[i].equals("Kim")) {
-                answer = "김서방은 " + i + "에 있다";
-                break;
+        for (int i = 0; i < n; i++) {
+            if (i == 0) {
+                answer += "수";
+            } else if (i % 2 == 0) {
+                answer += "수";
+            } else {
+                answer += "박";
             }
         }
         return answer;
