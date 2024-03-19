@@ -1,9 +1,9 @@
 class Solution {
-    public String solution(int num) {
-        if (num % 2 == 0) {
-            return "Even";
-        } else {
-            return "Odd";
+    public int solution(int[] numbers) {
+        int answer = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            answer = answer + numbers[i];
         }
+        return 45 - answer;
     }
 }
