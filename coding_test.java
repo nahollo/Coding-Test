@@ -1,9 +1,12 @@
 class Solution {
-    public int solution(int[] numbers) {
+    public int solution(int n) {
         int answer = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            answer = answer + numbers[i];
+        for (int i = 0; i < n; i++) {
+            if (n % i == 1) {
+                answer = i;
+                break;
+            }
         }
-        return 45 - answer;
+        return answer;
     }
 }
