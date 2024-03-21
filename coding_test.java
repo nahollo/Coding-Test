@@ -1,15 +1,22 @@
 class Solution {
-    public int solution(int[] absolutes, boolean[] signs) {
-        int answer = 0;
-
-        for (int i = 0; i < absolutes.length; i++) {
-            if (signs[i] == false) {
-                absolutes[i] = absolutes[i] * -1;
-            }
+    public String solution(String s) {
+        String answer = "";
+        char[] temp = new char[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            temp[i] = s.charAt(i);
         }
-
-        for (int i = 0; i < absolutes.length; i++) {
-            answer += absolutes[i];
+        int cnt = 0;
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] == ' ') {
+                answer += " ";
+                cnt = 0;
+            } else if (cnt % 2 == 0) {
+                answer += Character.toUpperCase(temp[i]);
+                cnt++;
+            } else {
+                answer += Character.toLowerCase(temp[i]);
+                cnt++;
+            }
         }
 
         return answer;
