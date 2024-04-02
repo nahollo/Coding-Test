@@ -1,41 +1,38 @@
 class Solution {
-    public int solution(String s) {
-        int answer = 0;
-        char[] num = new char[s.length()]; // s를 char 배열로 받기
+    public int solution(int x, int y, int n) {
 
-        for (int i = 0; i < s.length(); i++) {
-            num[i] = s.charAt(i);
-        }
-        if (num[0] == '-') { // s의 맨 앞이 -일 때
-            for (int i = 1; i < s.length(); i++) {
-                answer = answer + (num[s.length() - i] - '0') * j(i - 1);
-            }
-            answer = answer * (-1);
-            System.out.println(answer);
-        } else if (num[0] == '+') { // s의 맨 앞이 +일 때
-            for (int i = 1; i < s.length(); i++) {
-                answer = answer + (num[s.length() - i] - '0') * j(i - 1);
-            }
-            System.out.println(answer);
-        } else {
-            for (int i = 0; i < s.length(); i++) { // s의 맨 앞에 아무것도 없을 때
-                answer = answer + (num[s.length() - i - 1] - '0') * j(i);
-            }
+        int[] dp = new int[y + 1];
+        for (int i = 0; i <= y; i++) {
+            dp[i] = 2100000000;
         }
 
-        return answer;
-    }
+        dp[x] = 0; // 초기값 설정
 
-    public int j(int x) { // 10의 제곱을 만드는 메서드
-        int temp = 1;
-        if (x == 0) {
-            return 1;
-        } else {
-            for (int i = 0; i < x; i++) {
-                temp = temp * 10;
+        for (int i = x; i <= y; i++) {
+            int plus = i + n;
+            int x2 = i * 2;
+            int x3 = i * 3;
+
+            if (plus <= y) { // x에 n을 더하는 경우
+                if (dp[plus] > dp[i] + 1) {
+                    dp[plus] = dp[i] + 1;
+                }
             }
-            return temp;
+            if (x2 <= y) { // x를 2배 하는 경우
+                if (dp[x2] > dp[i] + 1) {
+                    dp[x2] = dp[i] + 1;
+                }
+            }
+            if (x3 <= y) { // x를 3배 하는 경우
+                if (dp[x3] > dp[i] + 1) {
+                    dp[x3] = dp[i] + 1;
+                }
+            }
         }
 
+        if (dp[y] == 2100000000) // 목표값에 도달할 수 없는 경우
+            return -1;
+        else
+            return dp[y];
     }
 }
