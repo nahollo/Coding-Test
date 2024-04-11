@@ -1,19 +1,20 @@
 class Solution {
-    public String solution(String s) {
-        String[] num = s.split(" ");
-        int max = -2100000000;
-        int min = 2100000000;
 
-        for (int i = 0; i < num.length; i++) {
-            if(Integer.parseInt(num[i]) > max){
-                max = Integer.parseInt(num[i]);
+    public boolean solution(String s) {
+        int pCnt = 0, yCnt = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'p' || s.charAt(i) == 'P') {
+                pCnt++;
             }
-            if (Integer.parseInt(num[i]) < min){
-                min = Integer.parseInt(num[i]);
+            if (s.charAt(i) == 'y' || s.charAt(i) == 'Y') {
+                yCnt++;
             }
         }
-
-        String answer = min + " " + max;
-        return answer;
+        if (yCnt == pCnt) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
