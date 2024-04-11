@@ -1,19 +1,15 @@
 class Solution {
-    public int solution(String s) {
-        char[] stack = new char[s.length()]; // 스택을 사용한 알고리즘 풀이
-        int top = 0; // 스택의 최상단을 체크할 변수
-        stack[0] = s.charAt(0); // 반복문 전 스택을 하나 채우기
-        for (int i = 1; i < s.length(); i++) { // 문자열 반복문
-            if (top >= 0 && stack[top] == s.charAt(i)) { // 스택이 안비어있고 문자가 같을 때
-                top--; // 스택 제가
-            } else { // 아니면 스택에 채우기
-                stack[++top] = s.charAt(i);
-            }
+    public int solution(int n) {
+        if (n <= 1) { // 피보나치를 못하면 n 리턴
+            return n;
         }
-        if(top == -1){ // 스택이 비어있으면 1 리턴
-            return 1;
-        } else { // 스택이 차있으면 0 리턴
-            return 0;
+        int[] fib = new int[n + 1]; // 피보나치 값을 저장 할 배열
+        fib[0] = 0; // 알고리즘에서 피보나치를 구하기 위한 최소 조건
+        fib[1] = 1; // 알고리즘에서 피보나치를 구하기 위한 최소 조건
+        
+        for (int i = 2; i <= n; i++) { // 반복문으로 피보나치 구현
+            fib[i] = (fib[i - 1] + fib[i - 2]) % 1234567;
         }
+        return fib[n];
     }
 }
